@@ -1,0 +1,34 @@
+# Owner: project owner.
+# Fails a PR whose branch is named <owner>/... (or feature/person-N-...) when it changes files outside
+# that owner's paths in OWNERSHIP.json. The project owner can allow an approved cross-folder PR by
+# adding the "ownership-override" label (CODEOWNERS review is still required).
+# Make this check "required" in branch protection (docs/BRANCH_PROTECTION.md).
+name: ownership-check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  ownership:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Changed files must stay inside the branch owner's paths
+        shell: powershell
+        env:
+          # Passed through env, never interpolated into the script, because branch names are untrusted input.
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+          OVERRIDE: ${{ contains(github.event.pull_request.labels.*.name, 'ownership-override') }}
+        run: |
+          $psArgs = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', 'scripts/check-ownership.ps1', '-Branch', $env:HEAD_REF, '-Base', "origin/$env:BASE_REF")
+          if ($env:OVERRIDE -eq 'true') { $psArgs += '-Override' }
+          powershell @psArgs
+          exit $LASTEXITCODE

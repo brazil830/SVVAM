@@ -1,0 +1,4 @@
+# Owner: project owner.
+packages:
+  - "apps/*"
+  - "packages/*"

@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "description": "Machine-readable ownership map used by scripts/check-ownership.ps1. Must stay identical in meaning to .github/CODEOWNERS (scripts/verify-repo.ps1 checks this). Paths ending in '/' cover the whole folder. A file matching no path belongs to 'default'. When paths overlap, the longest matching path wins. Owner: project owner.",
+  "default": "project-owner",
+  "unscopedBranches": ["main", "integration"],
+  "overrideLabel": "ownership-override",
+  "approvalRequired": [
+    {
+      "path": "apps/desktop-ui/src-tauri/tauri.conf.json",
+      "editor": "person-3",
+      "approver": "project-owner",
+      "reason": "Packaging/installer config (bundle, identifier, signing, sidecar) needs project-owner approval. CODEOWNERS lists only the project owner for this file, so Person 3's PRs to it need project-owner review."
+    }
+  ],
+  "owners": {
+    "project-owner": {
+      "name": "Project owner (lead / integration owner)",
+      "handle": "@atlas-project-owner",
+      "workstream": null,
+      "branchPrefixes": ["project-owner/"],
+      "paths": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "OWNERSHIP.json",
+        ".gitignore",
+        ".gitattributes",
+        ".editorconfig",
+        ".env.example",
+        "package.json",
+        "pnpm-workspace.yaml",
+        "pnpm-lock.yaml",
+        "tsconfig.base.json",
+        "project_atlas_master_prd.md",
+        "project_atlas_common_team_execution_prd_v1_2_parallel.md",
+        ".github/",
+        "scripts/",
+        "packages/contracts/",
+        "docs/prd/",
+        "docs/ANALYSIS.md",
+        "docs/PERMISSIONS.md",
+        "docs/BRANCH_PROTECTION.md",
+        "docs/HANDOFF.md",
+        "docs/architecture.md",
+        "docs/api-contract.md",
+        "docs/threat-model.md",
+        "docs/decisions.md",
+        "workstreams/README.md",
+        "services/atlas-core/pyproject.toml",
+        "services/atlas-core/README.md",
+        "services/atlas-core/src/atlas/__init__.py",
+        "services/atlas-core/src/atlas/main.py",
+        "services/atlas-core/src/atlas/config.py",
+        "services/atlas-core/src/atlas/api/",
+        "services/atlas-core/src/atlas/models/",
+        "services/atlas-core/src/atlas/orchestrator/",
+        "services/atlas-core/src/atlas/audit/",
+        "services/atlas-core/tests/conftest.py"
+      ]
+    },
+    "person-1": {
+      "name": "Person 1 - Desktop Runtime & Safety",
+      "handle": "@atlas-person-1",
+      "workstream": "workstreams/person-1-runtime-safety/",
+      "branchPrefixes": ["person-1/", "feature/person-1-"],
+      "paths": [
+        "workstreams/person-1-runtime-safety/",
+        "services/atlas-core/src/atlas/policy/",
+        "services/atlas-core/src/atlas/executor/",
+        "services/atlas-core/src/atlas/adapters/",
+        "services/atlas-core/src/atlas/verifier/",
+        "services/atlas-core/src/atlas/journal/",
+        "services/atlas-core/tests/runtime/"
+      ]
+    },
+    "person-2": {
+      "name": "Person 2 - Voice, Intent & 9Router",
+      "handle": "@atlas-person-2",
+      "workstream": "workstreams/person-2-voice-9router/",
+      "branchPrefixes": ["person-2/", "feature/person-2-"],
+      "paths": [
+        "workstreams/person-2-voice-9router/",
+        "services/atlas-core/src/atlas/intent/",
+        "services/atlas-core/src/atlas/planner/",
+        "services/atlas-core/src/atlas/providers/",
+        "services/atlas-core/tests/intent/"
+      ]
+    },
+    "person-3": {
+      "name": "Person 3 - UI & Animated Character",
+      "handle": "@atlas-person-3",
+      "workstream": "workstreams/person-3-ui-character/",
+      "branchPrefixes": ["person-3/", "feature/person-3-"],
+      "paths": [
+        "workstreams/person-3-ui-character/",
+        "apps/desktop-ui/"
+      ]
+    },
+    "person-4": {
+      "name": "Person 4 - AWS, QA & End-to-End Integration",
+      "handle": "@atlas-person-4",
+      "workstream": "workstreams/person-4-aws-qa-integration/",
+      "branchPrefixes": ["person-4/", "feature/person-4-"],
+      "paths": [
+        "workstreams/person-4-aws-qa-integration/",
+        "services/atlas-core/tests/integration/",
+        "docs/test-results/",
+        "docs/setup-windows.md"
+      ]
+    }
+  }
+}

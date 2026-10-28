@@ -1,0 +1,5 @@
+# Placeholder. Person 3 adds the Tauri 2 dependencies and build script.
+[package]
+name = "project-atlas"
+version = "0.0.0"
+edition = "2021"

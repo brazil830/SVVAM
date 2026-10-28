@@ -1,0 +1,22 @@
+# Owner: project owner.
+# Repository structure, ownership-map consistency and secret scan on every push/PR to main and integration.
+name: ci
+
+on:
+  push:
+    branches: [main, integration]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-repo:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify repository structure and ownership map
+        shell: powershell
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-repo.ps1
+          exit $LASTEXITCODE

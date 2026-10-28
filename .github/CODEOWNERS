@@ -1,0 +1,85 @@
+# CODEOWNERS - who must approve changes to each path.
+#
+# >>> REPLACE THE PLACEHOLDER HANDLES BEFORE USE <<<
+#   @atlas-project-owner  -> GitHub username of the project owner (lead / integration owner)
+#   @atlas-person-1       -> Person 1 - Desktop Runtime & Safety
+#   @atlas-person-2       -> Person 2 - Voice, Intent & 9Router
+#   @atlas-person-3       -> Person 3 - UI & Animated Character
+#   @atlas-person-4       -> Person 4 - AWS, QA & End-to-End Integration
+# Also update the "handle" fields in OWNERSHIP.json so both files agree.
+# These rules only block merges once branch protection has "Require review from Code Owners"
+# enabled on main and integration (see docs/BRANCH_PROTECTION.md).
+#
+# Later lines win over earlier lines. Keep this file in sync with OWNERSHIP.json
+# (scripts/verify-repo.ps1 fails if a path in OWNERSHIP.json has no line here).
+
+# ---- Default: everything not listed below (root files, docs, new folders) ----
+*                                                   @atlas-project-owner
+
+# ---- Project owner: root config, scripts, CI, contracts, shared docs, backend core ----
+/README.md                                          @atlas-project-owner
+/CONTRIBUTING.md                                    @atlas-project-owner
+/OWNERSHIP.json                                     @atlas-project-owner
+/.gitignore                                         @atlas-project-owner
+/.gitattributes                                     @atlas-project-owner
+/.editorconfig                                      @atlas-project-owner
+/.env.example                                       @atlas-project-owner
+/package.json                                       @atlas-project-owner
+/pnpm-workspace.yaml                                @atlas-project-owner
+/pnpm-lock.yaml                                     @atlas-project-owner
+/tsconfig.base.json                                 @atlas-project-owner
+/project_atlas_master_prd.md                        @atlas-project-owner
+/project_atlas_common_team_execution_prd_v1_2_parallel.md @atlas-project-owner
+/.github/                                           @atlas-project-owner
+/scripts/                                           @atlas-project-owner
+/packages/contracts/                                @atlas-project-owner
+/docs/prd/                                          @atlas-project-owner
+/docs/ANALYSIS.md                                   @atlas-project-owner
+/docs/PERMISSIONS.md                                @atlas-project-owner
+/docs/BRANCH_PROTECTION.md                          @atlas-project-owner
+/docs/HANDOFF.md                                    @atlas-project-owner
+/docs/architecture.md                               @atlas-project-owner
+/docs/api-contract.md                               @atlas-project-owner
+/docs/threat-model.md                               @atlas-project-owner
+/docs/decisions.md                                  @atlas-project-owner
+/workstreams/README.md                              @atlas-project-owner
+/services/atlas-core/pyproject.toml                 @atlas-project-owner
+/services/atlas-core/README.md                      @atlas-project-owner
+/services/atlas-core/src/atlas/__init__.py          @atlas-project-owner
+/services/atlas-core/src/atlas/main.py              @atlas-project-owner
+/services/atlas-core/src/atlas/config.py            @atlas-project-owner
+/services/atlas-core/src/atlas/api/                 @atlas-project-owner
+/services/atlas-core/src/atlas/models/              @atlas-project-owner
+/services/atlas-core/src/atlas/orchestrator/        @atlas-project-owner
+/services/atlas-core/src/atlas/audit/               @atlas-project-owner
+/services/atlas-core/tests/conftest.py              @atlas-project-owner
+
+# ---- Person 1 - Desktop Runtime & Safety ----
+/workstreams/person-1-runtime-safety/               @atlas-person-1
+/services/atlas-core/src/atlas/policy/              @atlas-person-1
+/services/atlas-core/src/atlas/executor/            @atlas-person-1
+/services/atlas-core/src/atlas/adapters/            @atlas-person-1
+/services/atlas-core/src/atlas/verifier/            @atlas-person-1
+/services/atlas-core/src/atlas/journal/             @atlas-person-1
+/services/atlas-core/tests/runtime/                 @atlas-person-1
+
+# ---- Person 2 - Voice, Intent & 9Router ----
+/workstreams/person-2-voice-9router/                @atlas-person-2
+/services/atlas-core/src/atlas/intent/              @atlas-person-2
+/services/atlas-core/src/atlas/planner/             @atlas-person-2
+/services/atlas-core/src/atlas/providers/           @atlas-person-2
+/services/atlas-core/tests/intent/                  @atlas-person-2
+
+# ---- Person 3 - UI & Animated Character ----
+/workstreams/person-3-ui-character/                 @atlas-person-3
+/apps/desktop-ui/                                   @atlas-person-3
+# Tauri 2 desktop shell: Person 3 edits it, but the packaging/installer config (bundle, identifier,
+# signing, sidecar) needs project-owner approval, so the project owner is the required reviewer here.
+# (OWNERSHIP.json "approvalRequired"; docs/decisions.md D9.)
+/apps/desktop-ui/src-tauri/tauri.conf.json          @atlas-project-owner
+
+# ---- Person 4 - AWS, QA & End-to-End Integration ----
+/workstreams/person-4-aws-qa-integration/           @atlas-person-4
+/services/atlas-core/tests/integration/             @atlas-person-4
+/docs/test-results/                                 @atlas-person-4
+/docs/setup-windows.md                              @atlas-person-4

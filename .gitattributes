@@ -1,0 +1,26 @@
+# Owner: project owner.
+# Line-ending normalization: prevents whole-file CRLF/LF diffs between Windows machines.
+* text=auto eol=lf
+
+# PowerShell scripts keep CRLF so Windows PowerShell 5.1 tools are happy.
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary assets: never diff or normalize
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.wav binary
+*.mp3 binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.pdf binary
+
+# Lockfiles: no textual merge; regenerate instead (owned by project owner)
+pnpm-lock.yaml -diff merge=binary

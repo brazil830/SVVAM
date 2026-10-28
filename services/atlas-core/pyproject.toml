@@ -1,0 +1,6 @@
+# Placeholder. Project owner completes this (build backend, dependencies requested by PR).
+[project]
+name = "atlas-core"
+version = "0.0.0"
+requires-python = ">=3.11"
+dependencies = []
